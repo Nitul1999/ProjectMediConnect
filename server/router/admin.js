@@ -66,7 +66,7 @@ router.get("/profile/view/:id", async (req, res) => {
         } catch (error) {
             res.status(500).json({ message: "Server error", error });
         }
-    })
+})
 
 
 // Update Admin Details/profile..working
@@ -102,7 +102,7 @@ router.delete("/admin-delete-profile/:id", async (req, res) => {
 //from here some end point of admin to create and update employee details
 // **Make sure this line is present at the end**
 
-//get all employee details admin...working
+//get all employee details...working
 router.get('/employee/all',async(req,res)=>{
     try {
         const employeedata = await employee.find({})
@@ -137,6 +137,25 @@ router.get('/employee/:id',async(req,res)=>{
            }
 });
 
+//update emptype by admin 
+router.put('/employee/update-employee-type/:id',async(req,res)=>{
+    try {
+        const {id:_id}=req.params
+        const {emptype} = req.body
+        if(!mongoose.Types.ObjectId.isValid(_id)){
+            return res.status(400).json({ message: "Invalid employee id" });
+        }
+        const updatedemployee = await employee.findByIdAndUpdate(_id, {emptype}, {new:true})
+
+        if(!updatedemployee){
+            return res.status(204).json({ message: "Employee Data Not Updated" });
+        }
+        res.status(200).json({ message: "Employee Data Updated Successfully", data: updatedemployee})
+        
+    } catch (error) {
+        res.status(500).json({message:"Internal Server Error"})
+    }
+})
 
 //add employeee details by admin
 router.post('/employee/add',async(req,res)=>{
