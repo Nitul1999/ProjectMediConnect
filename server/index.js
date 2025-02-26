@@ -1,0 +1,26 @@
+const express = require('express')
+const app = express()
+
+app.use(express.json())   
+require('dotenv').config
+
+
+const port = process.env.PORT || 1001
+const dbconfig = require('./config/dbconnection')
+
+const adminroutes = require('./router/admin');
+const employeeroutes = require('./router/employee')
+
+
+//api end point start//
+app.use('/api/admin',adminroutes)
+app.use('/api/employee',employeeroutes)
+
+
+//running app 
+dbconfig.once('connected',()=>{
+    console.log('connected to database....')
+    app.listen(port,()=>{
+        console.log(`app is running on ${port}`)
+})
+})
