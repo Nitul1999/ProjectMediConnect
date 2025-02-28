@@ -21,12 +21,12 @@ export const Login = () => {
 
   return (
     <div>
-        <div className="form-container">
+        <div className="form-container h-1 flex justify-center item-center">
             <div className="form">
                 <div className="form-heading">
-                    <h2>Login</h2>
+                    <h2 className='text-center'>Login</h2>
                 </div>
-                <div className="form-element">
+                <div className="form-element w-3">
                     <Form layout='vertical' name='login' onFinish={onfinish}>
                             <Form.Item label="Email" name="email">
                                 <Input type="email" placeholder="Enter your Email" />
