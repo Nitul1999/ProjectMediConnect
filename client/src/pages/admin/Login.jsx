@@ -9,6 +9,7 @@ export const Login = () => {
             const response = await axios.post("http://localhost:1001/api/admin/login",values) 
             if(response.data.success){
                message.success(response.data.message)
+               window.location.href = "/"
             }else{
                  message.error(response.data.message) 
                  window.location.href ='/admin/login'            
