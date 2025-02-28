@@ -31,27 +31,32 @@ router.post("/register", async (req, res) => {
 
 // Admin Login Route..working
 router.post("/login", async (req, res) => {
+console.log("Received data:", req.body)
     try {
-        const adminExist = await Admin.findOne({ email: req.body.email });
-        if (!adminExist) {
-            return res.status(400).json({ message: "Email does not exist", success: false });
+        const {email,password} = req.body
+        const adminExist = await Admin.findOne({email});
+        if (!email || !password) {
+            return res.status(400).send({ message: "Email and Password are required", success: false });
         }
-        const validedPassword = await bcrypt.compare(req.body.password, adminExist.password);
+        if (!adminExist) {
+            return res.status(400).send({ message: "Email does not exist", success: false });
+        }
+        const validedPassword = await bcrypt.compare(password, adminExist.password);
         if (!validedPassword) {
-            return res.status(400).json({ message: "Invalid Password", success: false });
+            return res.status(400).send({ message: "Invalid Password", success: false });
         }
         const token = jwt.sign(
             { userid: adminExist._id },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
         );
-        res.json({
+        res.send({
             message: "Login Successful",
             success: true,
             data: token
         });
     } catch (error) {
-        res.status(500).json({ message: "Server error", error });
+        res.status(500).send({ message: "Server error", error });
     }
 });
 //view admin details by id ... working
@@ -98,7 +103,6 @@ router.delete("/admin-delete-profile/:id", async (req, res) => {
 });
 
 
-
 //from here some end point of admin to create and update employee details
 // **Make sure this line is present at the end**
 
@@ -137,7 +141,7 @@ router.get('/employee/:id',async(req,res)=>{
            }
 });
 
-//update emptype by admin 
+//update emptype by admin  ..woking
 router.put('/employee/update-employee-type/:id',async(req,res)=>{
     try {
         const {id:_id}=req.params
@@ -157,7 +161,7 @@ router.put('/employee/update-employee-type/:id',async(req,res)=>{
     }
 })
 
-//add employeee details by admin
+//add employeee details by admin..working
 router.post('/employee/add',async(req,res)=>{
     try {
         const newemp = req.body;

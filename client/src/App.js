@@ -1,11 +1,19 @@
 
 import './App.css';
+import {  Routes,Route,BrowserRouter } from "react-router-dom";
+import '@ant-design/v5-patch-for-react-19';
+import { Home } from './component/Home';
+import { Login } from './pages/admin/Login';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+   <BrowserRouter>
+    <Routes>
+      <Route  path='/' element={<Home />}/>
+      <Route path='/admin/login' element={<Login />} />
+
+    </Routes>
+   </BrowserRouter>
   );
 }
 

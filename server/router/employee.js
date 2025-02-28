@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
     }
 });
 
-//Update Profile by Emp Id 
+//Update Profile by Emp Id ...working
 router.patch('/update-profile/:id',async(req,res)=>{ //used patch becaused modify specific parts of the profile data
     try {
         const {id:_id} = req.params
