@@ -8,8 +8,8 @@ hospital Managment system for patient,doctor,techician and admin,
 cd server run npm install
 
 #start the server
-add .env file 
-In .env file add MONGO_URL and JWT_SECRET 
+#add .env file 
+#In .env file add MONGO_URL and JWT_SECRET 
 
 run node index.js or nodemon index
 
