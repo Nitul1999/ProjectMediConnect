@@ -6,6 +6,9 @@ const employee = require('../model/emp');
 const { default: mongoose } = require("mongoose");
 const router = express.Router();
 
+const authmiddleware = require('../middleware/authmiddleware')
+
+
 // Admin Registration Route..working
 router.post("/register", async (req, res) => {
     try {

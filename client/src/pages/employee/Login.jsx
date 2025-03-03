@@ -21,7 +21,7 @@ export const Login = () => {
         //  }
 
           try {
-           const response = await axiosInstance.post("/admin/login",values) 
+           const response = await axiosInstance.post("/employee/login",values) 
     
             if(response.data.success){
                message.success(response.data.message)
@@ -29,7 +29,7 @@ export const Login = () => {
                window.location.href = "/"
             }else{
                  message.error(response.data.message) 
-                 window.location.href ='/admin/login'            
+                 window.location.href ='/employee/login'            
             }
          } catch (error) {
              message.error(error.response?.data?.message || "Something went wrong!");
@@ -40,7 +40,7 @@ export const Login = () => {
 
   return (
     <div>
-        <div className="form-container  flex justify-center mt-1 ">
+        <div className="form-container h-1 flex justify-center item-center">
             <div className="form">
                 <div className="form-heading">
                     <h2 className='text-center'>Login</h2>
